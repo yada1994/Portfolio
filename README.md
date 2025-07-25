@@ -1,60 +1,66 @@
-# My Personal Portfolio
-# Welcome to my personal portfolio project! This repository showcases my skills in full-stack web development, featuring a modern React frontend built with Vite and a robust Node.js backend handling functionalities like a contact form.
+My Personal Portfolio
+Welcome to my personal portfolio project! This repository showcases my skills in full-stack web development, featuring a modern React frontend built with Vite and a robust Node.js backend handling functionalities like a contact form.
 
-# ✨ Features
-# Responsive Design: A sleek and modern user interface that adapts to various screen sizes (desktop, tablet, mobile).
+✨ Features
+Responsive Design: A sleek and modern user interface that adapts to various screen sizes (desktop, tablet, mobile).
 
-# Interactive UI: Built with React to provide a dynamic and engaging user experience.
+Interactive UI: Built with React to provide a dynamic and engaging user experience.
 
-# Contact Form: A functional contact form that allows visitors to send messages directly to me, powered by a Node.js backend.
+Contact Form: A functional contact form that allows visitors to send messages directly to me, powered by a Node.js backend.
 
-# Modular Structure: Clearly separated frontend and backend directories for better organization and maintainability.
+Modular Structure: Clearly separated frontend and backend directories for better organization and maintainability.
 
-# 🚀 Technologies Used
-# This project leverages a powerful stack of technologies:
+🚀 Technologies Used
+This project leverages a powerful stack of technologies:
 
-# Frontend
-# React: A JavaScript library for building user interfaces.
+Frontend
+React: A JavaScript library for building user interfaces.
 
-# Vite: A fast build tool for modern web projects, used for rapid development and optimized builds.
+Vite: A fast build tool for modern web projects, used for rapid development and optimized builds.
 
-# HTML5 & CSS3: For structuring and styling the web content.
+HTML5 & CSS3: For structuring and styling the web content.
 
-# Tailwind CSS (Optional, but common with React/Vite): If you're using Tailwind, you might want to add this.
+Tailwind CSS (Optional, but common with React/Vite): If you're using Tailwind, you might want to add this.
 
-# Backend
-# Node.js: A JavaScript runtime environment for server-side logic.
+Backend
+Node.js: A JavaScript runtime environment for server-side logic.
 
-# Express.js: A fast, unopinionated, minimalist web framework for Node.js, used for building the API.
+Express.js: A fast, unopinionated, minimalist web framework for Node.js, used for building the API.
 
-# Nodemailer (Optional, but common for contact forms): If you're using Nodemailer for email sending, mention it.
+Nodemailer (Optional, but common for contact forms): If you're using Nodemailer for email sending, mention it.
 
-# dotenv (Optional): For managing environment variables securely.
+dotenv (Optional): For managing environment variables securely.
 
-# 🛠️ Getting Started
-# Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+🛠️ Getting Started
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-# Prerequisites
-# Before you begin, ensure you have the following installed on your system:
+Prerequisites
+Before you begin, ensure you have the following installed on your system:
 
-# Git: For cloning the repository.
+Git: For cloning the repository.
 
-# Download Git
+Download Git
 
-# Download Node.js (npm is included)
+Node.js & npm (or Yarn/pnpm): For running the JavaScript environments.
 
-# Installation and Setup
-# Clone the repository:
-# Open your terminal or command prompt and clone the project to your local machine:
+Download Node.js (npm is included)
 
-# git clone https://github.com/yada1994/Portfolio.git
-# cd Portfolio
+Install Yarn (Optional)
 
-# Backend Setup:
-# Navigate into the backend directory, install dependencies, and set up environment variables.
+Install pnpm (Optional)
 
-# cd backend
-# npm install # or yarn install or pnpm install
+Installation and Setup
+Clone the repository:
+Open your terminal or command prompt and clone the project to your local machine:
+
+git clone https://github.com/yada1994/Portfolio.git
+cd Portfolio
+
+Backend Setup:
+Navigate into the backend directory, install dependencies, and set up environment variables.
+
+cd backend
+npm install # or yarn install or pnpm install
 
 Create a .env file for the backend:
 In the backend directory, create a file named .env and add your environment variables. This file is ignored by Git for security reasons.
