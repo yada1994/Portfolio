@@ -1,20 +1,19 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import axios from "axios"; // Import axios
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState(null); // 'success' or 'error'
-  const [submissionMessage, setSubmissionMessage] = useState('');
-
-  // IMPORTANT: Replace 'YOUR_WEB3FORMS_ACCESS_KEY' with your actual key from Web3Forms.
-  // Get your free key at https://web3forms.com/
-  const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; 
+  const [submissionStatus, setSubmissionStatus] = useState(null); 
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,35 +23,49 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmissionStatus(null);
-    setSubmissionMessage('');
+    setSubmissionMessage("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
+      // Use axios.post instead of fetch
+      const response = await axios.post(
+        `${backendUrl}/api/contact`,
+        {
           access_key: WEB3FORMS_ACCESS_KEY,
           ...formData,
-        }),
-      });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
-      const result = await response.json();
+      const result = response.data; // Axios puts the response body in .data
 
       if (result.success) {
-        setSubmissionStatus('success');
-        setSubmissionMessage('Your message has been sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+        setSubmissionStatus("success");
+        setSubmissionMessage("Your message has been sent successfully!");
+        setFormData({ name: "", email: "", subject: "", message: "" }); // Clear form
       } else {
-        setSubmissionStatus('error');
-        setSubmissionMessage(result.message || 'Something went wrong. Please try again.');
+        setSubmissionStatus("error");
+        setSubmissionMessage(
+          result.message || "Something went wrong. Please try again."
+        );
       }
     } catch (error) {
-      console.error('Submission error:', error);
-      setSubmissionStatus('error');
-      setSubmissionMessage('Network error. Please check your connection and try again.');
+      console.error("Submission error:", error);
+      setSubmissionStatus("error");
+      // Check if the error has a response from the server (e.g., 4xx or 5xx status)
+      if (axios.isAxiosError(error) && error.response) {
+        setSubmissionMessage(
+          error.response.data.message || "Server error. Please try again."
+        );
+      } else {
+        setSubmissionMessage(
+          "Network error. Please check your connection and try again."
+        );
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -66,7 +79,10 @@ const ContactForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <label htmlFor="name" className="block text-gray-200 text-sm font-medium mb-2">
+        <label
+          htmlFor="name"
+          className="block text-gray-200 text-sm font-medium mb-2"
+        >
           Name
         </label>
         <input
@@ -87,7 +103,10 @@ const ContactForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <label htmlFor="email" className="block text-gray-200 text-sm font-medium mb-2">
+        <label
+          htmlFor="email"
+          className="block text-gray-200 text-sm font-medium mb-2"
+        >
           Email
         </label>
         <input
@@ -108,7 +127,10 @@ const ContactForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <label htmlFor="subject" className="block text-gray-200 text-sm font-medium mb-2">
+        <label
+          htmlFor="subject"
+          className="block text-gray-200 text-sm font-medium mb-2"
+        >
           Subject
         </label>
         <input
@@ -129,7 +151,10 @@ const ContactForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        <label htmlFor="message" className="block text-gray-200 text-sm font-medium mb-2">
+        <label
+          htmlFor="message"
+          className="block text-gray-200 text-sm font-medium mb-2"
+        >
           Message
         </label>
         <textarea
@@ -150,7 +175,9 @@ const ContactForm = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className={`p-3 rounded-lg text-center ${
-            submissionStatus === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
+            submissionStatus === "success"
+              ? "bg-green-600 text-white"
+              : "bg-red-600 text-white"
           }`}
         >
           {submissionMessage}
@@ -168,14 +195,28 @@ const ContactForm = () => {
       >
         {isSubmitting ? (
           <div className="flex items-center justify-center">
-            <svg className="animate-spin h-5 w-5 text-white mr-3" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg
+              className="animate-spin h-5 w-5 text-white mr-3"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
             Sending...
           </div>
         ) : (
-          'Send Message'
+          "Send Message"
         )}
       </motion.button>
     </form>

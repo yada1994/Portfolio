@@ -13,6 +13,7 @@ import ContactSection from "./components/ContactSection";
 import ExperienceSection from "./components/ExperienceSection";
 
 function App() {
+
   const leftScrollPanelRef = useRef(null);
   const IntroductionSectionRef = useRef(null);
   const ProjectSectionRef = useRef(null);
